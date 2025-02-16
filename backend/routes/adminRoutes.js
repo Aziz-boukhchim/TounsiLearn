@@ -18,13 +18,17 @@ router.get("/pdfs", async(req,res) => {
 });
 
 // Route to add a new university -------------------------------------------------------------
-router.post('/add-university', async (req, res) => {
+router.post('/add-university', authenticate ,async (req, res) => {
     const { name } = req.body;
 
     try {
         const newUniversity = new University({
             name,
         });
+
+        if(req.user.role !== "admin") {
+            res.status(403).json({message: "Access denied"});
+        }
 
         await newUniversity.save();
 
