@@ -1,3 +1,4 @@
+//comment routes
 const express = require("express");
 const Comment = require("../models/Comment");
 const authenticate = require("../middleware/authenticate");

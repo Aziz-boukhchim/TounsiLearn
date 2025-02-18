@@ -1,3 +1,4 @@
+//admin routes
 const express = require("express");
 const Pdf = require("../models/Pdf");
 const University = require("../models/University");

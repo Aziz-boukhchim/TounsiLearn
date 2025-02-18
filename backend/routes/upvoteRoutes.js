@@ -1,3 +1,4 @@
+//upvote routes
 const express = require("express");
 const Upvote = require("../models/Upvote");
 const Pdf = require("../models/Pdf");
