@@ -7,6 +7,10 @@ const pdfRoutes = require("./routes/pdfRoutes");
 const upvoteRoutes = require("./routes/upvoteRoutes");
 const commentRoutes = require("./routes/commentRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const CourseRoutes = require("./routes/courseRoutes");
+const branchRoutes = require("./routes/branchRoutes");
+const yearRoutes = require("./routes/yearRoutes");
+const semesterRoutes = require("./routes/semesterRoutes");
 
 
 
@@ -27,6 +31,10 @@ app.use("/api/pdfs", pdfRoutes);
 app.use("/api/upvotes", upvoteRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/courses", CourseRoutes);
+app.use("/api/branches", branchRoutes);
+app.use("/api/years", yearRoutes);
+app.use("/api/semesters", semesterRoutes);
 
 
 const PORT = process.env.PORT || 5000;
