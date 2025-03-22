@@ -1,0 +1,119 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #EAEAEA; /* Light gray background */
+  color: #222222; /* Darker gray text for better contrast */
+  margin: 0;
+  padding: 0;
+}
+
+/* Profile Page Container */
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #F6F6F6; /* Slightly lighter gray to contrast with the body */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  border-radius: 8px;
+  margin-top: 35px;
+}
+
+/* Title */
+h1 {
+  font-size: 2rem;
+  color: #222222; /* Darker Gray */
+  margin-bottom: 20px;
+}
+
+/* Error Message */
+.error {
+  color: #D32F2F; /* Dark red for visibility */
+  background: rgba(211, 47, 47, 0.15); /* Light red background */
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* User PDFs Section */
+.user-pdfs {
+  margin-top: 30px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #222222; /* Darker Gray */
+  margin-bottom: 15px;
+}
+
+.pdf-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Grid layout for PDFs */
+  gap: 20px;
+}
+
+/* PDF Cards */
+.pdf-card {
+  background-color: #FFFFFF; /* White background for better contrast */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pdf-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.pdf-card h4 {
+  font-size: 1.2rem;
+  color: #333; /* Darker text */
+  margin-bottom: 10px;
+}
+
+.pdf-card p {
+  font-size: 1rem;
+  color: white; /* Slightly lighter gray */
+  margin-bottom: 10px;
+}
+
+/* View Button */
+.pdf-card .view-btn {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: #4A90E2; /* Blue button */
+  color: #FFFFFF; /* White text */
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pdf-card .view-btn:hover {
+  background-color: #357ABD; /* Darker blue */
+  transform: scale(1.05);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .pdf-list {
+      grid-template-columns: 1fr; /* Single column on small screens */
+  }
+
+  .profile-container {
+      padding: 15px;
+  }
+
+  h1 {
+      font-size: 1.5rem;
+  }
+
+  h2 {
+      font-size: 1.2rem;
+  }
+
+  .pdf-card {
+      padding: 12px;
+  }
+}

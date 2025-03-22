@@ -1,0 +1,103 @@
+.upload-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 25px;
+    background-color: #FFFFFF; /* Light gray background */
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    color: #000000; /* Black text */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333333; /* Dark gray */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form Inputs & Selects */
+input, select, textarea {
+    padding: 12px;
+    font-size: 1em;
+    background: #FFFFFF; /* White background */
+    border: 1px solid #CCCCCC; /* Light gray border */
+    border-radius: 6px;
+    color: #333333; /* Dark gray text */
+    transition: 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #4A90E2; /* Blue focus effect */
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* File Input */
+input[type="file"] {
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Upload Button */
+button {
+    background: #4A90E2 !important; /* Blue button */
+    color: white;
+    font-size: 1.1em;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #357ABD !important; /* Darker blue */
+    transform: scale(1.05);
+}
+
+/* Error & Success Messages */
+.error, .success {
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.error {
+    color: #D32F2F; /* Dark red */
+    background: rgba(211, 47, 47, 0.15); /* Light red background */
+}
+
+.success {
+    color: #388E3C; /* Dark green */
+    background: rgba(56, 142, 60, 0.15); /* Light green background */
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

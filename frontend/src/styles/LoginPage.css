@@ -1,0 +1,180 @@
+/* Page Layout */
+.login-page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Left Side - Image & Info */
+.login-info {
+  width: 70%;
+  position: relative;
+  flex-direction: column; /* Stack items vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #f1f1f1; /* Light gray for better contrast */
+  padding: 40px;
+  background: url('../pictures/Log.webp') center/cover no-repeat;
+}
+
+/* Dark overlay to improve text visibility */
+.login-info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(71, 58, 126, 0.295); /* Lighter overlay for brighter text */
+}
+
+/* Text content stays on top */
+.login-info .text-content {
+  position: relative;
+  z-index: 1;
+  max-width: 80%;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* Glow effect for contrast */
+}
+
+.login-info h1, .login-info p {
+  color: rgba(255, 255, 255,255) !important; /* Ensures pure white text */
+}
+.login-info h1 {
+  margin-top: 100px;
+  font-size: 50px;
+}
+
+
+.login-info p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #ffffff !important; /* Slightly gray to be easy on the eyes */
+}
+
+/* Right Side - Login Form */
+.login-container {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  position: absolute;
+  top: 45px; /* Keeps it at the top */
+  width: 220px; /* Adjust size for better fit */
+  height: 140px;
+}
+
+
+h2 {
+  font-size: 28px;
+  color: #4A90E2;
+  margin-bottom: 20px;
+}
+
+/* Input Fields */
+.input-group {
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #333; /* Dark text for clarity */
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #4A90E2;
+}
+
+/* Submit Button */
+.submit-btn {
+  background-color: #4A90E2;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 300px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #357ABD;
+}
+
+/* Register Link */
+.register-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.register-link p {
+  font-size: 14px;
+  color: #333;
+}
+
+.register-link a {
+  color: #4A90E2;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column;
+  }
+
+  .login-info {
+    width: 100%;
+    height: 40vh;
+    padding: 30px;
+    background-position: center;
+  }
+
+  .login-container {
+    width: 100%;
+    padding: 30px;
+  }
+  .logo {
+    position: relative; /* Places it within the container */
+    top: 0;
+    right: 0;
+    width: 200px; /* Smaller size for mobile */
+    margin-bottom: 20px; /* Adds spacing below */
+  }
+
+  .login-container {
+    width: 100%;
+    padding: 30px;
+    align-items: center;
+    text-align: center;
+  }
+}
