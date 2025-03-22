@@ -12,6 +12,9 @@ const branchRoutes = require("./routes/branchRoutes");
 const yearRoutes = require("./routes/yearRoutes");
 const semesterRoutes = require("./routes/semesterRoutes");
 
+const cors = require("cors");
+
+
 
 
 dotenv.config();
@@ -20,7 +23,12 @@ connectDB();
 
 const app = express();
 
+app.use(cors());
+
 app.use(express.json()); // Middleware to parse JSON requests
+
+app.use("/uploads", express.static("uploads"));
+
 
 app.get("/" , (req , res) => {
     res.send("API is running...");
@@ -35,6 +43,7 @@ app.use("/api/courses", CourseRoutes);
 app.use("/api/branches", branchRoutes);
 app.use("/api/years", yearRoutes);
 app.use("/api/semesters", semesterRoutes);
+
 
 
 const PORT = process.env.PORT || 5000;
