@@ -3,6 +3,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const authenticate = require("../middleware/authenticate");
 require('dotenv').config(); // Make sure to require dotenv for environment variables
 
 const router = express.Router();
@@ -39,11 +40,49 @@ router.post("/login", async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        //  Include role in the token payload
+        const token = jwt.sign(
+            { userId: user._id, role: user.role }, 
+            process.env.JWT_SECRET, 
+            { expiresIn: '1h' }
+        );
+
         res.json({ token });
     } catch (error) {
         res.status(500).json({ message: "Server error" });
     }
 });
+
+router.put("/name", authenticate ,async(req,res) => {
+    const { name } = req.body;
+
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            req.user.id,
+            { name },
+            { new: true }
+        );
+
+    if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+    res.json({message: "Name updated successfully", user:updatedUser});
+
+    } catch (error) {
+        console.error("Error updating name:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

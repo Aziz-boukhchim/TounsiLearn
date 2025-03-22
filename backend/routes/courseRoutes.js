@@ -27,6 +27,8 @@ router.post("/add", authenticate, async (req, res) => {
 router.get("/:universityId", async(req,res) => {
     const { universityId } = req.params;
 
+    res.set("Cache-Control", "no-store"); // Prevent caching
+
     try {
         const Courses = await Course.find({universityId});
         res.status(200).json(Courses);

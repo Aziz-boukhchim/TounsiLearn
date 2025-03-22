@@ -118,6 +118,21 @@ router.get("/:universityId/:courseId", async(req,res) => {
 
 });
 
+//get pdfs per user
+router.get("/userPdf", authenticate , async(req,res) => {
+    try {
+
+        if(!req.user || !req.user.id){
+            return res.status(401).json({message : "Unauthorized"});
+        }
+
+        const pdfs = await Pdf.find({uploadedBy: req.user.id});
+        res.status(200).json(pdfs);
+    } catch(error) {
+        res.status(500).json({message : "server error"})
+    }
+});
+
 // Fetch PDFs based on university, course, year, branch, and semester
 router.get("/search", async (req, res) => {
     const { universityId, courseId, yearId, branchId, semesterId } = req.query;
@@ -128,7 +143,12 @@ router.get("/search", async (req, res) => {
     if (universityId) query.university = universityId;
     if (courseId) query.course = courseId;
     if (yearId) query.year = yearId;
-    if (branchId) query.branch = branchId;
+
+    // If it's not the first year, include the branchId in the query
+    if (yearId !== "firstYearId" && branchId) {
+        query.branch = branchId;
+    }
+
     if (semesterId) query.semester = semesterId;
 
     try {
