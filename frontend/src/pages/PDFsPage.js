@@ -32,6 +32,8 @@ const PDFsPage = () => {
                     params: queryParams,
                 });
 
+                console.log("Fetched PDFs:", response.data); // Debugging log
+
                 // Filter out PDFs that are not approved
                 const approvedPdfs = response.data.filter(pdf => pdf.status === "Approved");
                 setPdfs(approvedPdfs);
@@ -56,7 +58,7 @@ const PDFsPage = () => {
                                 <h3>{pdf.title}</h3>
                                 <p>{pdf.description}</p>
                                 <a
-                                    href={`http://localhost:5000/${pdf.fileurl}`}
+                                    href={pdf.fileurl}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="view-btn"
