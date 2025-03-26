@@ -1,6 +1,5 @@
 //pdf routes
 const express = require("express");
-const multer = require("multer");
 const Pdf = require("../models/Pdf");
 const University = require("../models/University");
 const authenticate = require("../middleware/authenticate");
@@ -11,85 +10,99 @@ const Branch = require("../models/Branch");
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/"); // folder where files will be saved
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" + file.originalname);
+require("dotenv").config();
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
+const multer = require("multer");
+
+
+//configure cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+//setup cloudinary storage for PDFs
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: "pdfs", // The folder name in Cloudinary
+        format: async(req,file) => "pdf",
+        public_id: (req,file) => Date.now() + "-" + file.originalname,
     },
 });
+
 
 // multer setup for file upload
 const upload = multer({ storage });
 
 // Upload a PDF -------------------------------------------------------------------------------------------
-// Upload a PDF -------------------------------------------------------------------------------------------
-router.post("/upload", authenticate, upload.single('pdfFile'), async (req, res) => {
-    const { title, universityId, courseId, yearId, branchId, semesterId, description } = req.body;
-    const pdfFilePath = req.file ? req.file.path : null; // Safeguard in case file is not uploaded
-    
-    if (!pdfFilePath) {
-        return res.status(400).json({ message: "File upload failed or missing file" });
-    }
-
+router.post("/upload", authenticate, upload.single("pdfFile"), async (req, res) => {
     try {
+        if (!req.file || !req.file.path) {
+            return res.status(400).json({ message: "File upload failed or missing file" });
+        }
+
+        const { title, universityId, courseId, yearId, branchId, semesterId, description } = req.body;
+
+        // Validate required fields
         if (!universityId || !courseId || !yearId || !semesterId) {
             return res.status(400).json({ message: "University, Course, Year, and Semester IDs are required" });
         }
 
         // Check if the university exists
         const university = await University.findById(universityId);
-        if (!university) {
-            return res.status(400).json({ message: "University not found" });
-        }
+        if (!university) return res.status(400).json({ message: "University not found" });
 
-        // Check if the course exists and belongs to the specified university
-        const course = await Course.findOne({ _id: courseId, universityId: university._id });
-        if (!course) {
-            return res.status(400).json({ message: "Course not found for this university" });
-        }
+        // Check if the course exists and belongs to the university
+        const course = await Course.findOne({ _id: courseId, universityId });
+        if (!course) return res.status(400).json({ message: "Course not found for this university" });
 
         // Check if the year exists and belongs to the course
-        const year = await Year.findOne({ _id: yearId, courseId: course._id });
-        if (!year) {
-            return res.status(400).json({ message: "Year not found for this course" });
-        }
+        const year = await Year.findOne({ _id: yearId, courseId });
+        if (!year) return res.status(400).json({ message: "Year not found for this course" });
 
         // Check if the semester exists and belongs to the year
-        const semester = await Semester.findOne({ _id: semesterId, yearId: year._id });
-        if (!semester) {
-            return res.status(400).json({ message: "Semester not found for this year" });
-        }
+        const semester = await Semester.findOne({ _id: semesterId, yearId });
+        if (!semester) return res.status(400).json({ message: "Semester not found for this year" });
 
         let branch = null;
         if (branchId) {
-            branch = await Branch.findOne({ _id: branchId, yearId: year._id });
-            if (!branch) {
-                return res.status(400).json({ message: "Branch not found for this year" });
-            }
+            branch = await Branch.findOne({ _id: branchId, yearId });
+            if (!branch) return res.status(400).json({ message: "Branch not found for this year" });
         }
 
-        // Create new PDF entry
+        // Upload to Cloudinary as a RAW PDF file
+        const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path, {
+            folder: "pdfs",
+            resource_type: "raw", // Raw file (PDF)
+            public_id: Date.now() + "-" + req.file.originalname,
+            format: "pdf",
+        });
+
+        // Save the file URL from Cloudinary
         const newPdf = new Pdf({
             title,
             description,
-            fileurl: pdfFilePath,
-            university: university._id,
-            course: course._id,
-            year: year._id,
-            semester: semester._id,
-            branch: branch ? branch._id : null, // Only add branch if it's provided
-            status: "Pending", // Initially marked as pending for approval
-            uploadedBy: req.user.id, // The user who uploaded the PDF
+            fileurl: cloudinaryResponse.secure_url, // Correct Cloudinary file URL
+            university: universityId,
+            course: courseId,
+            year: yearId,
+            semester: semesterId,
+            branch: branchId || null,
+            status: "Pending",
+            uploadedBy: req.user.id,
         });
 
         await newPdf.save();
         res.status(201).json({ message: "PDF uploaded successfully", pdf: newPdf });
     } catch (error) {
+        console.error("Upload error:", error);
         res.status(500).json({ message: "Server error", error: error.message });
     }
 });
+
 
 
 // get all pdfs
