@@ -150,25 +150,30 @@ h2 {
 @media (max-width: 768px) {
   .login-page {
     flex-direction: column;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
   }
 
   .login-info {
     width: 100%;
-    height: 40vh;
+    height: 40vh; /* Adjusted for smaller screens */
     padding: 30px;
+    background: url('../pictures/Log.webp') center/cover no-repeat;
+    background-size: cover; /* Ensures the background scales properly */
     background-position: center;
   }
 
   .login-container {
     width: 100%;
     padding: 30px;
+    text-align: center;
   }
+
   .logo {
-    position: relative; /* Places it within the container */
+    position: relative;
     top: 0;
     right: 0;
-    width: 200px; /* Smaller size for mobile */
-    margin-bottom: 20px; /* Adds spacing below */
+    width: 200px;
+    margin-bottom: 20px;
   }
 
   .login-container {
