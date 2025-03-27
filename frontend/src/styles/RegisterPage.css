@@ -63,6 +63,7 @@
   background-color: #fff;
   box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15); /* Soft shadow for a smoother separation effect */
   border-left: 1px solid rgba(0, 0, 0, 0.1); /* Soft border to separate sections */
+  box-sizing: border-box;
 }
 
 /* Heading Styles */
@@ -142,6 +143,7 @@ h2 {
 @media (max-width: 768px) {
   .register-page {
     flex-direction: column;
+    height: auto; /* Allow page height to adjust based on content */
   }
 
   .register-info {
@@ -150,12 +152,14 @@ h2 {
     padding: 30px;
     background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
   }
 
   .register-container {
     width: 100%;
     padding: 30px;
     text-align: center;
+    margin: 0 auto; /* Centers the form on the screen */
   }
 
   .logo {
