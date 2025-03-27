@@ -9,7 +9,7 @@ const ProfilePage = () => {
 
   // Fetch PDFs uploaded by the user
   useEffect(() => {
-    axios.get("http://localhost:5000/api/pdfs/userPdf", { headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` } })
+    axios.get("https://tounsilearn.onrender.com/api/pdfs/userPdf", { headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` } })
       .then(response => {
         setUserPdfs(response.data);
       })
@@ -37,7 +37,7 @@ const ProfilePage = () => {
                   <p>{pdf.status}</p>
                   {/* Link or button to view the PDF */}
                   <a
-                                    href={`http://localhost:5000/${pdf.fileurl}`}
+                                    href={pdf.fileurl}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="view-btn"

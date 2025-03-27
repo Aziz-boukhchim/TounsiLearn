@@ -21,7 +21,7 @@ const AdminPanel = () => {
 
   const fetchPdfs = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/pdfs", {
+      const response = await fetch("https://tounsilearn.onrender.com/api/admin/pdfs", {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
 
@@ -29,75 +29,74 @@ const AdminPanel = () => {
       const pendingPdfs = data.filter(pdf => pdf.status === "Pending");
       setPdfs(pendingPdfs);
     } catch (error) {
-      console.error("Error fetching PDFs:", error);
+      console.error("Error fetching PDFs");
     }
   };
 
   const fetchUniversities = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/universities", {
+      const response = await fetch("https://tounsilearn.onrender.com/api/admin/universities", {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
       const data = await response.json();
       setUniversities(data);
     } catch (error) {
-      console.error("Error fetching universities:", error);
+      console.error("Error fetching universities");
     }
   };
 
   const fetchCourses = async (universityId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/courses/${universityId}`, {
+      const response = await fetch(`https://tounsilearn.onrender.com/api/admin/courses/${universityId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
       const data = await response.json();
-      console.log(data); // Check what the data looks like
       setCourses(data);
     } catch (error) {
-      console.error("Error fetching courses:", error);
+      console.error("Error fetching courses");
     }
   };
   
 
   const fetchYears = async (courseId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/years/${courseId}`, {
+      const response = await fetch(`https://tounsilearn.onrender.com/api/admin/years/${courseId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
       const data = await response.json();
       setYears(data);
     } catch (error) {
-      console.error("Error fetching years:", error);
+      console.error("Error fetching years");
     }
   };
 
   const fetchBranches = async (yearId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/branches/${yearId}`, {
+      const response = await fetch(`https://tounsilearn.onrender.com/api/admin/branches/${yearId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
       const data = await response.json();
       setBranches(data);
     } catch (error) {
-      console.error("Error fetching branches:", error);
+      console.error("Error fetching branches");
     }
   };
 
   const fetchSemesters = async (yearId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/semesters/${yearId}`, {
+      const response = await fetch(`https://tounsilearn.onrender.com/api/admin/semesters/${yearId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
       const data = await response.json();
       setSemesters(data);
     } catch (error) {
-      console.error("Error fetching semesters:", error);
+      console.error("Error fetching semesters");
     }
   };
 
   const handleApprove = async (pdfId) => {
     try {
-      await fetch(`http://localhost:5000/api/admin/pdf/approve/${pdfId}`, {
+      await fetch(`https://tounsilearn.onrender.com/api/admin/pdf/approve/${pdfId}`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -105,13 +104,13 @@ const AdminPanel = () => {
       });
       fetchPdfs(); // Refresh list
     } catch (error) {
-      console.error("Error approving PDF:", error);
+      console.error("Error approving PDF");
     }
   };
 
   const handleReject = async (pdfId) => {
     try {
-      await fetch(`http://localhost:5000/api/admin/pdf/reject/${pdfId}`, {
+      await fetch(`https://tounsilearn.onrender.com/api/admin/pdf/reject/${pdfId}`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -119,7 +118,7 @@ const AdminPanel = () => {
       });
       fetchPdfs(); // Refresh list
     } catch (error) {
-      console.error("Error rejecting PDF:", error);
+      console.error("Error rejecting PDF");
     }
   };
 
@@ -167,7 +166,7 @@ const AdminPanel = () => {
           const name = formData.get("name");
 
           try {
-            await fetch("http://localhost:5000/api/admin/add-university", {
+            await fetch("https://tounsilearn.onrender.com/api/admin/add-university", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -177,7 +176,7 @@ const AdminPanel = () => {
             });
             fetchUniversities();
           } catch (error) {
-            console.error("Error adding university:", error);
+            console.error("Error adding university");
           }
         }}
       >
@@ -204,7 +203,7 @@ const AdminPanel = () => {
           const universityId = selectedUniversity;
 
           try {
-            await fetch("http://localhost:5000/api/admin/add-course", {
+            await fetch("https://tounsilearn.onrender.com/api/admin/add-course", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -214,7 +213,7 @@ const AdminPanel = () => {
             });
             fetchCourses(universityId);
           } catch (error) {
-            console.error("Error adding course:", error);
+            console.error("Error adding course");
           }
         }}
       >
@@ -249,7 +248,7 @@ const AdminPanel = () => {
           const courseId = selectedCourse;
 
           try {
-            await fetch("http://localhost:5000/api/admin/add-year", {
+            await fetch("https://tounsilearn.onrender.com/api/admin/add-year", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -259,7 +258,7 @@ const AdminPanel = () => {
             });
             fetchYears(courseId);
           } catch (error) {
-            console.error("Error adding year:", error);
+            console.error("Error adding year");
           }
         }}
       >
@@ -294,7 +293,7 @@ const AdminPanel = () => {
           const yearId = selectedYear;
 
           try {
-            await fetch("http://localhost:5000/api/admin/add-branch", {
+            await fetch("https://tounsilearn.onrender.com/api/admin/add-branch", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -304,7 +303,7 @@ const AdminPanel = () => {
             });
             fetchBranches(yearId);
           } catch (error) {
-            console.error("Error adding branch:", error);
+            console.error("Error adding branch");
           }
         }}
       >
@@ -339,7 +338,7 @@ const AdminPanel = () => {
           const yearId = selectedYear;
 
           try {
-            await fetch("http://localhost:5000/api/admin/add-semester", {
+            await fetch("https://tounsilearn.onrender.com/api/admin/add-semester", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -349,7 +348,7 @@ const AdminPanel = () => {
             });
             fetchSemesters(yearId);
           } catch (error) {
-            console.error("Error adding semester:", error);
+            console.error("Error adding semester");
           }
         }}
       >

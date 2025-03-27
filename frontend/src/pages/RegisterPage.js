@@ -29,7 +29,7 @@ const Register = () => {
           }
 
         try {
-            const response = axios.post("http://localhost:5000/api/users/register", {
+            const response = axios.post("https://tounsilearn.onrender.com/api/users/register", {
                 name,
                 email,
                 password,

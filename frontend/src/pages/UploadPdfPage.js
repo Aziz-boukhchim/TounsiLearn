@@ -24,7 +24,7 @@ const UploadPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/admin/universities")
+      .get("https://tounsilearn.onrender.com/api/admin/universities")
       .then((response) => setUniversities(response.data))
       .catch(() => setError("Error fetching universities"));
   }, []);
@@ -32,7 +32,7 @@ const UploadPage = () => {
   useEffect(() => {
     if (universityId) {
       axios
-        .get(`http://localhost:5000/api/courses/${universityId}`)
+        .get(`https://tounsilearn.onrender.com/api/courses/${universityId}`)
         .then((response) => setCourses(response.data))
         .catch(() => setError("Error fetching courses"));
     }
@@ -41,7 +41,7 @@ const UploadPage = () => {
   useEffect(() => {
     if (courseId) {
       axios
-        .get(`http://localhost:5000/api/years/${courseId}`)
+        .get(`https://tounsilearn.onrender.com/api/years/${courseId}`)
         .then((response) => setYears(response.data))
         .catch(() => setError("Error fetching years"));
     }
@@ -53,7 +53,7 @@ const UploadPage = () => {
 
     if (selectedYear && !isFirstYear) {
       axios
-        .get(`http://localhost:5000/api/branches/${selectedYear}`)
+        .get(`https://tounsilearn.onrender.com/api/branches/${selectedYear}`)
         .then((response) => setBranches(response.data))
         .catch(() => setError("Error fetching branches"));
     } else {
@@ -65,7 +65,7 @@ const UploadPage = () => {
   useEffect(() => {
     if (selectedYear) {
       axios
-        .get(`http://localhost:5000/api/semesters/${selectedYear}`)
+        .get(`https://tounsilearn.onrender.com/api/semesters/${selectedYear}`)
         .then((response) => setSemesters(response.data))
         .catch(() => setError("Error fetching semesters"));
     } else {
@@ -96,7 +96,7 @@ const UploadPage = () => {
     const token = localStorage.getItem("authToken"); // Get the token from localStorage
 
     try {
-      const response = await axios.post("http://localhost:5000/api/pdfs/upload", formData, {
+      const response = await axios.post("https://tounsilearn.onrender.com/api/pdfs/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Authorization": `Bearer ${token}`,

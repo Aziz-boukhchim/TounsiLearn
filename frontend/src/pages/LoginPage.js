@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/users/login", {
+      const response = await axios.post("https://tounsilearn.onrender.com/api/users/login", {
         email,
         password,
       });
@@ -29,7 +29,7 @@ const Login = () => {
 
       // ✅ Decode and check if role exists
       const decodedToken = jwtDecode(token);
-      console.log("Decoded Token:", decodedToken); // Debugging step
+      
       if (decodedToken.role) {
         localStorage.setItem("role", decodedToken.role);
       } else {

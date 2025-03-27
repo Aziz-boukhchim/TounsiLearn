@@ -19,7 +19,7 @@ const SelectOptionsPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/years/${courseId}`)
+      .get(`https://tounsilearn.onrender.com/api/years/${courseId}`)
       .then((response) => setYears(response.data))
       .catch(() => setError("Error fetching years"));
   }, [courseId]);
@@ -32,7 +32,7 @@ const SelectOptionsPage = () => {
   useEffect(() => {
     if (selectedYear && !isFirstYear) {
       axios
-        .get(`http://localhost:5000/api/branches/${selectedYear}`)
+        .get(`https://tounsilearn.onrender.com/api/branches/${selectedYear}`)
         .then((response) => setBranches(response.data))
         .catch(() => setError("Error fetching branches"));
     } else {
@@ -44,7 +44,7 @@ const SelectOptionsPage = () => {
   useEffect(() => {
     if (selectedYear) {
       axios
-        .get(`http://localhost:5000/api/semesters/${selectedYear}`)
+        .get(`https://tounsilearn.onrender.com/api/semesters/${selectedYear}`)
         .then((response) => setSemesters(response.data))
         .catch(() => setError("There Is No PDFs Yet In This Section"));
     } else {
@@ -73,7 +73,7 @@ const SelectOptionsPage = () => {
     }
 
     axios
-      .get(`http://localhost:5000/api/pdfs/search`, { params: searchParams })
+      .get(`https://tounsilearn.onrender.com/api/pdfs/search`, { params: searchParams })
       .then((response) => {
         navigate(
           `/pdfs/${universityId}/${courseId}/${selectedYear}/${selectedBranch || "none"}/${selectedSemester}`,

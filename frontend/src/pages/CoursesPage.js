@@ -14,7 +14,7 @@ const CoursesPage = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/courses/${universityId}`, {
+        const response = await axios.get(`https://tounsilearn.onrender.com/api/courses/${universityId}`, {
           headers: {
             'Cache-Control': 'no-cache', 
             'Pragma': 'no-cache'        

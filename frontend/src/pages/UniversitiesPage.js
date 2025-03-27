@@ -13,7 +13,7 @@ const UniversitiesPage = () => {
   useEffect(() => {
     const fetchUniversities = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/admin/universities");
+        const response = await axios.get("https://tounsilearn.onrender.com/api/admin/universities");
         setUniversities(response.data);
       } catch (err) {
         setError("Failed to fetch universities.");

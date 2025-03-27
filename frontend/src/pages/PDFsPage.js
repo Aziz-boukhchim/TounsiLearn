@@ -28,11 +28,10 @@ const PDFsPage = () => {
                     queryParams.branchId = branchId;
                 }
 
-                const response = await axios.get("http://localhost:5000/api/pdfs/search", {
+                const response = await axios.get("https://tounsilearn.onrender.com/api/pdfs/search", {
                     params: queryParams,
                 });
 
-                console.log("Fetched PDFs:", response.data); // Debugging log
 
                 // Filter out PDFs that are not approved
                 const approvedPdfs = response.data.filter(pdf => pdf.status === "Approved");
