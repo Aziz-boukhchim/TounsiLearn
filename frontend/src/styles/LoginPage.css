@@ -3,6 +3,7 @@
   display: flex;
   height: 100vh;
   width: 100%;
+  flex-direction: row; /* Aligns items horizontally */
 }
 
 /* Left Side - Image & Info */
@@ -39,13 +40,13 @@
 }
 
 .login-info h1, .login-info p {
-  color: rgba(255, 255, 255,255) !important; /* Ensures pure white text */
+  color: rgba(255, 255, 255, 255) !important; /* Ensures pure white text */
 }
+
 .login-info h1 {
   margin-top: 100px;
   font-size: 50px;
 }
-
 
 .login-info p {
   font-size: 18px;
@@ -64,6 +65,7 @@
   background-color: #fff;
   box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
   border-left: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 .logo {
@@ -72,7 +74,6 @@
   width: 220px; /* Adjust size for better fit */
   height: 140px;
 }
-
 
 h2 {
   font-size: 28px;
@@ -150,7 +151,8 @@ h2 {
 @media (max-width: 768px) {
   .login-page {
     flex-direction: column;
-    overflow-x: hidden; /* Prevents horizontal scrolling */
+    height: auto; /* Allow it to adjust height based on content */
+    overflow-x: hidden;
   }
 
   .login-info {
@@ -166,6 +168,7 @@ h2 {
     width: 100%;
     padding: 30px;
     text-align: center;
+    margin: 0 auto; /* This centers the form */
   }
 
   .logo {
@@ -176,10 +179,9 @@ h2 {
     margin-bottom: 20px;
   }
 
+  /* Ensure login-container is vertically centered in mobile */
   .login-container {
-    width: 100%;
-    padding: 30px;
-    align-items: center;
-    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 }
