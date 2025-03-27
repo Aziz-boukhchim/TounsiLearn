@@ -70,7 +70,6 @@ router.put("/name", authenticate ,async(req,res) => {
     res.json({message: "Name updated successfully", user:updatedUser});
 
     } catch (error) {
-        console.error("Error updating name:", error);
         res.status(500).json({ message: "Server error" });
     }
 });

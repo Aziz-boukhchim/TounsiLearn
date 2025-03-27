@@ -32,7 +32,6 @@ router.post("/upvote", authenticate, async (req, res) => {
             return res.status(201).json({ message: "Upvoted successfully", pdfId });
         }
     } catch (error) {
-        console.error(error);
         res.status(500).json({ message: "Server error" });
     }
 });
@@ -61,7 +60,6 @@ router.post("/downvote", authenticate, async (req, res) => {
             return res.status(201).json({ message: "Downvoted successfully", pdfId });
         }
     } catch (error) {
-        console.error(error);
         res.status(500).json({ message: "Server error" });
     }
 });

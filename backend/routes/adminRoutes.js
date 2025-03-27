@@ -57,7 +57,6 @@ router.patch("/pdf/approve/:pdfId", authenticate, async (req, res) => {
             pdf
         });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ message: "Error approving PDF" });
     }
 });
@@ -82,7 +81,6 @@ router.patch("/pdf/reject/:pdfId", authenticate , async(req,res) => {
             pdf
         })
     } catch(error) {
-        console.log(error);
         res.status(500).json({message: "Error rejecting PDF"})
     }
 });

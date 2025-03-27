@@ -98,7 +98,6 @@ router.post("/upload", authenticate, upload.single("pdfFile"), async (req, res) 
         await newPdf.save();
         res.status(201).json({ message: "PDF uploaded successfully", pdf: newPdf });
     } catch (error) {
-        console.error("Upload error:", error);
         res.status(500).json({ message: "Server error", error: error.message });
     }
 });
