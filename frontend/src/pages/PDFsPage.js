@@ -22,7 +22,7 @@ const PDFsPage = () => {
                     semesterId,
                 };
 
-                // gonna add an array full of first yearsID ( just testing now!! )
+                // gonna add an array full of first yearsID ( just testing for now ).
                 // Only include branchId if it's not the first year 
                 if (yearId !== "67b34e7f04cab6b919d2128e") {
                     queryParams.branchId = branchId;

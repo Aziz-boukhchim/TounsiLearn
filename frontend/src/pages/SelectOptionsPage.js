@@ -80,7 +80,7 @@ const SelectOptionsPage = () => {
           { state: { pdfs: response.data } }
         );
       })
-      .catch(() => setError("Error fetching PDFs."));
+      .catch(() => setError("No PDFs Uploaded For This Section Yet."));
   };
 
   return (
@@ -96,7 +96,7 @@ const SelectOptionsPage = () => {
               <option value="">Select Year</option>
               {years.map((year) => (
                 <option key={year._id} value={year._id}>
-                  {year.name} Year
+                  {year.name}
                 </option>
               ))}
             </select>
@@ -127,7 +127,7 @@ const SelectOptionsPage = () => {
               <option value="">Select Semester</option>
               {semesters.map((semester) => (
                 <option key={semester._id} value={semester._id}>
-                  Semester {semester.name}
+                   {semester.name}
                 </option>
               ))}
             </select>
