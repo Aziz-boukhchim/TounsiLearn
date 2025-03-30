@@ -189,7 +189,7 @@ const UploadPage = () => {
               <option value="">Select Year</option>
               {years.map((year) => (
                 <option key={year._id} value={year._id}>
-                  {year.name} Year
+                  {year.name} 
                 </option>
               ))}
             </select>
@@ -225,7 +225,7 @@ const UploadPage = () => {
               <option value="">Select Semester</option>
               {semesters.map((semester) => (
                 <option key={semester._id} value={semester._id}>
-                  Semester {semester.name}
+                   {semester.name}
                 </option>
               ))}
             </select>
